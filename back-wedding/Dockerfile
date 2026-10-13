@@ -16,7 +16,7 @@ COPY . .
 
 ENV APP_ENV=prod
 RUN if [ ! -f .env ]; then echo "APP_ENV=prod" > .env; fi \
-    && composer install --no-dev --optimize-autoloader --no-interaction \
+    && composer install --no-dev --optimize-autoloader --no-interaction --no-scripts \
     && APP_SECRET=build \
        DATABASE_URL="postgresql://build:build@localhost:5432/build" \
        php bin/console cache:clear --env=prod --no-debug \
