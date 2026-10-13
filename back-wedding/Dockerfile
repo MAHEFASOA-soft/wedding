@@ -18,6 +18,8 @@ ENV APP_ENV=prod
 RUN if [ ! -f .env ]; then echo "APP_ENV=prod" > .env; fi \
     && composer install --no-dev --optimize-autoloader --no-interaction --no-scripts \
     && APP_SECRET=build \
+       DEFAULT_URI="http://localhost" \
+       CORS_ALLOW_ORIGIN="^http://localhost$" \
        DATABASE_URL="postgresql://build:build@localhost:5432/build" \
        php bin/console cache:clear --env=prod --no-debug \
     && mkdir -p var public/uploads \
