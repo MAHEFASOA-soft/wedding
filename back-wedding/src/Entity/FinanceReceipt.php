@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity]
+class FinanceReceipt
+{
+    #[ORM\Id]
+    #[ORM\Column(type: 'string', length: 64)]
+    private string $id;
+
+    #[ORM\Column(type: 'string', length: 80)]
+    private string $number = '';
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private string $date = '';
+
+    #[ORM\Column(type: 'string', length: 180)]
+    private string $client = '';
+
+    #[ORM\Column(type: 'string', length: 64, nullable: true)]
+    private ?string $eventId = null;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $eventName = null;
+
+    #[ORM\Column(type: 'string', length: 160)]
+    private string $description = '';
+
+    #[ORM\Column(type: 'string', length: 80)]
+    private string $category = 'Paiement événement';
+
+    #[ORM\Column(type: 'bigint')]
+    private int $amount = 0;
+
+    #[ORM\Column(type: 'string', length: 60)]
+    private string $paymentMethod = 'Virement bancaire';
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private ?string $comment = null;
+
+    public function getId(): string { return $this->id; }
+    public function setId(string $id): self { $this->id = $id; return $this; }
+    public function getNumber(): string { return $this->number; }
+    public function setNumber(string $number): self { $this->number = $number; return $this; }
+    public function getDate(): string { return $this->date; }
+    public function setDate(string $date): self { $this->date = $date; return $this; }
+    public function getClient(): string { return $this->client; }
+    public function setClient(string $client): self { $this->client = $client; return $this; }
+    public function getEventId(): ?string { return $this->eventId; }
+    public function setEventId(?string $eventId): self { $this->eventId = $eventId; return $this; }
+    public function getEventName(): ?string { return $this->eventName; }
+    public function setEventName(?string $eventName): self { $this->eventName = $eventName; return $this; }
+    public function getDescription(): string { return $this->description; }
+    public function setDescription(string $description): self { $this->description = $description; return $this; }
+    public function getCategory(): string { return $this->category; }
+    public function setCategory(string $category): self { $this->category = $category; return $this; }
+    public function getAmount(): int { return $this->amount; }
+    public function setAmount(int $amount): self { $this->amount = $amount; return $this; }
+    public function getPaymentMethod(): string { return $this->paymentMethod; }
+    public function setPaymentMethod(string $paymentMethod): self { $this->paymentMethod = $paymentMethod; return $this; }
+    public function getComment(): ?string { return $this->comment; }
+    public function setComment(?string $comment): self { $this->comment = $comment; return $this; }
+}

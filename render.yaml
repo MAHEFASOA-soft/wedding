@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: efficiency-wedding-backend
+    env: docker
+    plan: free
+    rootDir: back-wedding
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: APP_SECRET
+        generateValue: true
+      - key: DEFAULT_URI
+        value: https://efficiency-wedding-backend.onrender.com
+      - key: CORS_ALLOW_ORIGIN
+        value: '^https?://(localhost|127\\.0\\.0\\.1)(:[0-9]+)?$|^https://.*\\.onrender\\.com$|^https://.*\\.yourdomain\\.com$'
+      - key: DATABASE_URL
+        fromDatabase:
+          name: efficiency-wedding-db
+          property: connectionString
+
+  - type: psql
+    name: efficiency-wedding-db
+    plan: free
+    ipAllowList: []
