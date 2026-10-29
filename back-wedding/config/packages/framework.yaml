@@ -18,5 +18,5 @@ when@test:
 when@prod:
     framework:
         session:
-            cookie_secure: true
-            cookie_samesite: none
+            cookie_secure: auto
+            cookie_samesite: lax
