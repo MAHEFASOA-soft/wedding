@@ -1,0 +1,10 @@
+.git
+.gitignore
+.env
+.env.*
+var
+vendor
+compose.yaml
+compose.override.yaml
+Dockerfile
+docker-entrypoint.sh

@@ -2,17 +2,27 @@ FROM php:8.2-fpm
 
 WORKDIR /var/www/html
 
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    libzip-dev \
-    unzip \
-    git \
-    curl \
-    && docker-php-ext-install pdo_pgsql pgsql zip
+# --no-install-recommends + nettoyage des listes apt : image plus petite, moins de CVE.
+# git n'est plus installé : composer télécharge des archives zip (--prefer-dist),
+# et git tirait openssh-client (CVE sans correctif publié).
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libpq-dev \
+        libzip-dev \
+        unzip \
+    && docker-php-ext-install pdo_pgsql pgsql zip \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
-COPY . .
+# Copie explicite au lieu de "COPY . ." : seul le nécessaire entre dans l'image.
+# Si un dossier est ajouté au projet (templates, translations...), l'ajouter ici.
+COPY composer.json composer.lock symfony.lock ./
+COPY bin ./bin
+COPY config ./config
+COPY migrations ./migrations
+COPY public ./public
+COPY src ./src
 
 RUN if [ ! -f .env ]; then \
         printf '%s\n' \
@@ -24,10 +34,13 @@ RUN if [ ! -f .env ]; then \
         > .env; \
     fi
 
-RUN composer install --no-interaction --prefer-dist --no-progress --no-dev --optimize-autoloader
+RUN composer install --no-interaction --prefer-dist --no-progress --no-dev --optimize-autoloader \
+    && php bin/console cache:clear --env=prod \
+    && php bin/console cache:warmup --env=prod \
+    && chown -R www-data:www-data var
 
-RUN php bin/console cache:clear --env=prod \
-    && php bin/console cache:warmup --env=prod
+# Exécution sans droits root (le port 8000 est > 1024, aucun droit spécial requis)
+USER www-data
 
 EXPOSE 8000
 
