@@ -1,0 +1,70 @@
+# Node / React / Vite / Electron
+wedding-main/node_modules/
+wedding-main/dist/
+wedding-main/build/
+wedding-main/.vite/
+wedding-main/*.tsbuildinfo
+wedding-main/npm-debug.log*
+wedding-main/yarn-debug.log*
+wedding-main/yarn-error.log*
+wedding-main/pnpm-debug.log*
+
+# Logs
+**/*.log
+logs/
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.render
+back-wedding/.env
+back-wedding/.env.*
+!back-wedding/.env.example
+!back-wedding/.env.render
+
+# PHP / Symfony
+back-wedding/vendor/
+back-wedding/var/cache/
+back-wedding/var/log/
+back-wedding/var/sessions/
+back-wedding/.phpunit.result.cache
+back-wedding/.env.local
+back-wedding/.env.local.php
+back-wedding/.env.*.local
+
+# Composer
+composer.phar
+
+# IDE / editors
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# OS files
+Desktop.ini
+
+# Electron build output
+wedding-main/out/
+wedding-main/release/
+
+# Coverage / test output
+wedding-main/coverage/
+back-wedding/.phpunit.cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Local database dumps
+*.sql
+*.sqlite
+*.sqlite3
+
+# Optional: keep package lock if you want to commit it
+# wedding-main/package-lock.json
+# back-wedding/composer.lock

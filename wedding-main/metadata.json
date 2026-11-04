@@ -1,0 +1,6 @@
+{
+  "name": "Efficiency Wedding Madagascar — Logiciel de Gestion",
+  "description": "Logiciel interne de gestion événementielle, planification et finances pour Efficiency Wedding Madagascar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
